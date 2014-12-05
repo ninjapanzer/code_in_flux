@@ -1,0 +1,19 @@
+<h6 id="before">Before</h6>
+<pre><code>&lt;div styleClass=&quot;label&quot;&gt;
+    &lt;textarea rows=&quot;50&quot; cols=&quot;100&quot;
+      value={value}
+      defaultValue={value}
+      onFocus={this.handleFocus}
+      onBlur={this.handleBlur}
+      onChange={this.handleChange}/&gt;
+&lt;/div&gt;
+</code></pre><h6 id="after">After</h6>
+<pre><code>React.DOM.div({styleClass: &quot;label&quot;},
+  React.DOM.textarea({rows: &quot;50&quot;, cols: &quot;100&quot;,
+    value: value,
+    defaultValue: value,
+    onFocus: this.handleFocus,
+    onBlur: this.handleBlur,
+    onChange: this.handleChange})
+)
+</code></pre>

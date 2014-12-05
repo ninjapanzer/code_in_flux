@@ -1,0 +1,19 @@
+<h6 id="dispatcher">Dispatcher</h6>
+<pre><code>define(function(require) {
+  var Dispatcher = require(&#39;bower_components/flux/dist/Flux.js&#39;).Dispatcher;
+  var assign = require(&#39;scripts/object-assign.js&#39;);
+  var AppDispatcher = assign(new Dispatcher(), {
+    /** A bridge function between the views and the dispatcher, marking the action
+     *  as a view action.  Another variant here could be handleServerAction.
+     *  @param  {object} action The data coming from the view.
+    */
+    handleViewAction: function(action) {
+      this.dispatch({
+        source: &#39;VIEW_ACTION&#39;,
+        action: action
+      });
+    }
+  });
+  return AppDispatcher;
+});
+</code></pre>

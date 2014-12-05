@@ -1,0 +1,15 @@
+:markdown
+  ######Actions
+      define(function(require) {
+        var AppDispatcher = require('scripts/dispatcher');
+        var assign = require('scripts/object-assign.js');
+        var Actions = {
+          create: function(text) {
+            AppDispatcher.handleViewAction({
+              actionType: 'create',
+              text: text
+            });
+          }
+        }
+        return Actions;
+      });

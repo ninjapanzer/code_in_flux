@@ -1,0 +1,17 @@
+:markdown
+  ######Component
+      var LikeButton = React.createClass({
+        render: function() {
+          var text = this.state.liked ? 'like' : 'haven\'t liked';
+          return (
+            <p onClick={this.handleClick}>
+              You {text} this. Click to toggle.
+            </p>
+          );
+        }
+      });
+  ######Renderer
+      React.render(
+        <LikeButton />,
+        document.getElementById('example')
+      );

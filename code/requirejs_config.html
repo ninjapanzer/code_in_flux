@@ -1,0 +1,17 @@
+<h6 id="code">Code</h6>
+<pre><code>requirejs.config({
+  &quot;baseUrl&quot; : &quot;&quot;,
+  &quot;paths&quot;   : {
+    &quot;domready&quot;      : &quot;components/domready/ready.min&quot;,
+    &quot;underscore&quot;    : &quot;components/underscore/underscore-min&quot;,
+    &quot;react&quot;         : &quot;components/react/react&quot;,
+    &quot;jquery&quot;        : &quot;components/jquery/dist/jquery.min&quot;
+  },
+  &quot;shim&quot;: {
+    &quot;jquery&quot;: {
+      &quot;exports&quot;: &#39;$&#39;
+    },
+  }
+});
+requirejs([&#39;js/main&#39;, &#39;js/components/campaignEdit&#39;]);
+</code></pre>

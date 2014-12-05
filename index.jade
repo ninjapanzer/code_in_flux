@@ -1,0 +1,82 @@
+- var revealLocation = 'bower_components/reveal.js/'
+doctype html
+html(lang="en")
+
+  include bower_components/RevealJade/shared/slide_mixins
+
+  mixin ulFragmentSlide(title,list,attrs)
+    +slide(attrs)
+      h1= title
+      +ulFragment(list)
+      block
+
+  include bower_components/RevealJade/shared/head
+
+  link(rel='external' type='text/html' src="bower_components/RevealJade/shared/head.jade")
+
+  body
+    .reveal
+      .slides
+        +titleSlide({title: "Code in Flux", subtitle: "A React JS Story"})
+        +slideGroup
+          +bigTitleSlide("Web Components, Dispatchers, and JSX")
+          +slide
+            img(src= "images/3be7cbde.png")
+        +slideGroup
+          +bigTitleSlide("Top Down Dataflow")
+          +slide
+            img(src= "images/flux-diagram-white-background.png")
+          +littleTitleSlide("What it really is")
+            img(src= "images/dragon_ouroboros_by_devin_rowell-d5tm7wl.jpg", width="50%")
+          +littleTitleSlide("A modern version :)")
+            img(src= "images/Ouroboros2.jpg")
+        +slideGroup
+          +bigTitleSlide("Lets start with an overview of React", {"data-background":"#007777"})
+            +speakerNotes
+              :markdown
+                - This is the view and event logic wrapped up into an individual component
+                - This means that orchestration of components is more or less the handled in the
+                    traditional webby way
+
+          +littleTitleSlide("A Traditional React Component", {"data-background":"#007777"})
+            include code/reactjs_ugly
+
+          +littleTitleSlide("This leads to JSX and WHY?", {"data-background":"#007777"})
+            include code/jsx_before_and_after
+            +speakerNotes
+              :markdown
+                - We always just want to write some HTML this makes that process encapsulated
+                    and not a dirty process
+                - Sure its a little messy in relation to actual templating laguages it has very low
+                    cognitive overhead
+                - Because of this mixing in other templating languages is hard
+                - Because you could run ReactJS serverside this can improve usability for screen readers
+                    but that really isn't any different from other server side systems
+
+        +slideGroup
+          +ulFragmentSlide("Flux", ["A framework build from bits and pieces of ReactJS","Designed to work from Server or Client","Can support bi-directional communication"])
+
+          +bigTitleSlide("Take another look")
+            img(src= "images/flux-diagram-white-background.png")
+          +ulFragmentSlide("Three Big Pieces", ["Dispatcher","Actions","DataStore"])
+          +slide
+            include code/flux_dispatcher
+          +slide
+            include code/flux_action
+          +slide
+            include code/flux_store
+          +bigTitleSlide("One More Time")
+            img(src= "images/flux-diagram-white-background.png")
+          +slide
+            include code/flux_react
+
+        +slideGroup
+          +bigTitleSlide("Shadow DOM")
+            img(src= "images/shadow-the-hedgehog--with-motorcycle.png")
+
+        +littleTitleSlide("Resources")
+          :markdown
+            Flux GitHub - https://github.com/facebook/flux
+            ReactJS - http://facebook.github.io/react/
+
+    include bower_components/RevealJade/shared/footer
