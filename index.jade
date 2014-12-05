@@ -1,0 +1,18 @@
+- var revealLocation = 'bower_components/reveal.js/'
+doctype html
+html(lang="en")
+
+  include bower_components/RevealJade/shared/slide_mixins
+
+  include bower_components/RevealJade/shared/head
+
+  link(rel='external' type='text/html' src="bower_components/RevealJade/shared/head.jade")
+
+  body
+    .reveal
+      .slides
+        +titleSlide({title: "Code in Flux", subtitle: "A React JS Story"})
+        +slideGroup
+
+
+    include bower_components/RevealJade/shared/footer

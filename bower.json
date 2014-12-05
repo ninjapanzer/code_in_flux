@@ -12,6 +12,7 @@
     "tests"
   ],
   "dependencies": {
-    "flux": "git@github.com:facebook/flux.git#~2.0.2"
+    "flux": "git@github.com:facebook/flux.git#~2.0.2",
+    "RevealJade": "git@github.com:ninjapanzer/RevealJade.git#master"
   }
 }
