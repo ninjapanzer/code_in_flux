@@ -1,0 +1,24 @@
+:markdown
+  ###### Component
+      var textBox = function(){
+        React.renderComponent(
+          TextBoxComponent(),
+          $('#editing')[0]
+        );};
+      var TextBoxComponent = React.createClass({
+        render: function() {
+          return CampaignEditBox.call(this);
+        }});
+  ###### Template
+      /** @jsx React.DOM */
+      define(['react'], function(React) {
+        var exports = {
+          editBox: function (){
+            var value = this.state.value;
+            return(
+              <div styleClass="label">
+                //...
+              </div>
+            )}};
+        return exports.editBox;
+      });

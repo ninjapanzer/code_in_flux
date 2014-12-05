@@ -1,0 +1,15 @@
+<h6 id="actions">Actions</h6>
+<pre><code>define(function(require) {
+  var AppDispatcher = require(&#39;scripts/dispatcher&#39;);
+  var assign = require(&#39;scripts/object-assign.js&#39;);
+  var Actions = {
+    create: function(text) {
+      AppDispatcher.handleViewAction({
+        actionType: &#39;create&#39;,
+        text: text
+      });
+    }
+  }
+  return Actions;
+});
+</code></pre>

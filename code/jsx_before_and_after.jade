@@ -1,0 +1,19 @@
+:markdown
+  ###### Before
+      <div styleClass="label">
+          <textarea rows="50" cols="100"
+            value={value}
+            defaultValue={value}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}/>
+        </div>
+  ###### After
+      React.DOM.div({styleClass: "label"},
+        React.DOM.textarea({rows: "50", cols: "100",
+          value: value,
+          defaultValue: value,
+          onFocus: this.handleFocus,
+          onBlur: this.handleBlur,
+          onChange: this.handleChange})
+      )

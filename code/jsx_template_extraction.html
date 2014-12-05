@@ -1,0 +1,24 @@
+<h6 id="component">Component</h6>
+<pre><code>var textBox = function(){
+  React.renderComponent(
+    TextBoxComponent(),
+    $(&#39;#editing&#39;)[0]
+  );};
+var TextBoxComponent = React.createClass({
+  render: function() {
+    return CampaignEditBox.call(this);
+  }});
+</code></pre><h6 id="template">Template</h6>
+<pre><code>/** @jsx React.DOM */
+define([&#39;react&#39;], function(React) {
+  var exports = {
+    editBox: function (){
+      var value = this.state.value;
+      return(
+        &lt;div styleClass=&quot;label&quot;&gt;
+          //...
+        &lt;/div&gt;
+      )}};
+  return exports.editBox;
+});
+</code></pre>

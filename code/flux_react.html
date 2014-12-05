@@ -1,0 +1,21 @@
+<h6 id="full-circle">Full Circle</h6>
+<pre><code>var MainSection = React.createClass({
+  _onToggleCompleteAll: function() {
+    TodoActions.toggleCompleteAll();
+  },
+  render: function() {
+    return (
+      &lt;section id=&quot;main&quot;&gt;
+        &lt;input
+          id=&quot;toggle-all&quot;
+          type=&quot;checkbox&quot;
+          onChange={this._onToggleCompleteAll}
+          checked={this.props.areAllComplete ? &#39;checked&#39; : &#39;&#39;}
+        /&gt;
+        &lt;label htmlFor=&quot;toggle-all&quot;&gt;Mark all as complete&lt;/label&gt;
+        &lt;ul id=&quot;todo-list&quot;&gt;{todos}&lt;/ul&gt;
+      &lt;/section&gt;
+    );
+  }
+});
+</code></pre>

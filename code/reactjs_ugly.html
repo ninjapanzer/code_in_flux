@@ -1,0 +1,17 @@
+<h6 id="component">Component</h6>
+<pre><code>var LikeButton = React.createClass({
+  render: function() {
+    var text = this.state.liked ? &#39;like&#39; : &#39;haven\&#39;t liked&#39;;
+    return (
+      &lt;p onClick={this.handleClick}&gt;
+        You {text} this. Click to toggle.
+      &lt;/p&gt;
+    );
+  }
+});
+</code></pre><h6 id="renderer">Renderer</h6>
+<pre><code>React.render(
+  &lt;LikeButton /&gt;,
+  document.getElementById(&#39;example&#39;)
+);
+</code></pre>

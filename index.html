@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Agile Development with Github</title>
+    <meta name="description" content="">
+    <meta name="author" content="Paul Scarrone">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.min.css">
+    <link id="theme" rel="stylesheet" href="bower_components/reveal.js/css/theme/moon.css">
+    <link rel="stylesheet" href="css/slides.css">
+    <!-- For syntax highlighting-->
+    <link rel="stylesheet" href="bower_components/reveal.js/lib/css/zenburn.css">
+    <script src="//localhost:35729/livereload.js"></script>
+    <script>var revealLocation = 'bower_components/reveal.js/'</script>
+    <!--if lt IE 9
+    script(src= revealLocation + 'lib/js/html5shiv.js')
+    
+    -->
+    <script type="text/javascript">document.write( '<link rel="stylesheet" href="' + revealLocation + 'css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );</script>
+  </head>
+  <link rel="external" type="text/html" src="bower_components/RevealJade/shared/head.jade">
+  <body>
+    <div class="reveal">
+      <div class="slides">
+            <section>
+              <h1>Code in Flux
+              </h1>
+              <h3>A React JS Story
+              </h3>
+              <p>
+                <div class="left"><small>Paul Scarrone</small></div>
+                <div class="left"><small class="twitter">@PaulSCoder</small></div>
+                <div class="left"><small class="email">paul.scarrone@gmail.com</small></div>
+              </p>
+              <aside class="notes">Title Slide</aside>
+            </section>
+            <section>
+                  <section>
+                    <h1>Web Components, Dispatchers, and JSX</h1>
+                  </section>
+                <section><img src="images/3be7cbde.png">
+                </section>
+            </section>
+            <section>
+                  <section>
+                    <h1>Top Down Dataflow</h1>
+                  </section>
+                <section><img src="images/flux-diagram-white-background.png">
+                </section>
+                  <section>
+                    <h3>What it really is</h3><img src="images/dragon_ouroboros_by_devin_rowell-d5tm7wl.jpg" width="50%">
+                  </section>
+                  <section>
+                    <h3>A modern version :)</h3><img src="images/Ouroboros2.jpg">
+                  </section>
+            </section>
+            <section>
+                  <section data-background="#007777">
+                    <h1>Lets start with an overview of React</h1>
+                      <aside class="notes"><ul>
+<li>This is the view and event logic wrapped up into an individual component</li>
+<li>This means that orchestration of components is more or less the handled in the
+  traditional webby way</li>
+</ul>
+
+                      </aside>
+                  </section>
+                  <section data-background="#007777">
+                    <h3>A Traditional React Component</h3><h6 id="component">Component</h6>
+<pre><code>var LikeButton = React.createClass({
+  render: function() {
+    var text = this.state.liked ? &#39;like&#39; : &#39;haven\&#39;t liked&#39;;
+    return (
+      &lt;p onClick={this.handleClick}&gt;
+        You {text} this. Click to toggle.
+      &lt;/p&gt;
+    );
+  }
+});
+</code></pre><h6 id="renderer">Renderer</h6>
+<pre><code>React.render(
+  &lt;LikeButton /&gt;,
+  document.getElementById(&#39;example&#39;)
+);
+</code></pre>
+                  </section>
+                  <section data-background="#007777">
+                    <h3>This leads to JSX and WHY?</h3><h6 id="before">Before</h6>
+<pre><code>&lt;div styleClass=&quot;label&quot;&gt;
+    &lt;textarea rows=&quot;50&quot; cols=&quot;100&quot;
+      value={value}
+      defaultValue={value}
+      onFocus={this.handleFocus}
+      onBlur={this.handleBlur}
+      onChange={this.handleChange}/&gt;
+&lt;/div&gt;
+</code></pre><h6 id="after">After</h6>
+<pre><code>React.DOM.div({styleClass: &quot;label&quot;},
+  React.DOM.textarea({rows: &quot;50&quot;, cols: &quot;100&quot;,
+    value: value,
+    defaultValue: value,
+    onFocus: this.handleFocus,
+    onBlur: this.handleBlur,
+    onChange: this.handleChange})
+)
+</code></pre>
+                      <aside class="notes"><ul>
+<li>We always just want to write some HTML this makes that process encapsulated
+  and not a dirty process</li>
+<li>Sure its a little messy in relation to actual templating laguages it has very low
+  cognitive overhead</li>
+<li>Because of this mixing in other templating languages is hard</li>
+<li>Because you could run ReactJS serverside this can improve usability for screen readers
+  but that really isn&#39;t any different from other server side systems</li>
+</ul>
+
+                      </aside>
+                  </section>
+            </section>
+            <section>
+                  <section>
+                    <h1>Flux</h1>
+                      <ul>
+                        <li data-fragment-index='0' class="fragment visible">A framework build from bits and pieces of ReactJS</li>
+                        <li data-fragment-index='1' class="fragment visible">Designed to work from Server or Client</li>
+                        <li data-fragment-index='2' class="fragment visible">Can support bi-directional communication</li>
+                      </ul>
+                  </section>
+                  <section>
+                    <h1>Take another look</h1><img src="images/flux-diagram-white-background.png">
+                  </section>
+                  <section>
+                    <h1>Three Big Pieces</h1>
+                      <ul>
+                        <li data-fragment-index='0' class="fragment visible">Dispatcher</li>
+                        <li data-fragment-index='1' class="fragment visible">Actions</li>
+                        <li data-fragment-index='2' class="fragment visible">DataStore</li>
+                      </ul>
+                  </section>
+                <section><h6 id="dispatcher">Dispatcher</h6>
+<pre><code>define(function(require) {
+  var Dispatcher = require(&#39;bower_components/flux/dist/Flux.js&#39;).Dispatcher;
+  var assign = require(&#39;scripts/object-assign.js&#39;);
+  var AppDispatcher = assign(new Dispatcher(), {
+    /** A bridge function between the views and the dispatcher, marking the action
+     *  as a view action.  Another variant here could be handleServerAction.
+     *  @param  {object} action The data coming from the view.
+    */
+    handleViewAction: function(action) {
+      this.dispatch({
+        source: &#39;VIEW_ACTION&#39;,
+        action: action
+      });
+    }
+  });
+  return AppDispatcher;
+});
+</code></pre>
+                </section>
+                <section><h6 id="actions">Actions</h6>
+<pre><code>define(function(require) {
+  var AppDispatcher = require(&#39;scripts/dispatcher&#39;);
+  var assign = require(&#39;scripts/object-assign.js&#39;);
+  var Actions = {
+    create: function(text) {
+      AppDispatcher.handleViewAction({
+        actionType: &#39;create&#39;,
+        text: text
+      });
+    }
+  }
+  return Actions;
+});
+</code></pre>
+                </section>
+                <section><h6 id="datastore">DataStore</h6>
+<pre><code>define(function(require){
+  var AppDispatcher = require(&#39;scripts/dispatcher&#39;);
+  var EventEmitter = require(&#39;scripts/events&#39;).EventEmitter;
+  var assign = require(&#39;scripts/object-assign&#39;);
+
+  var _store = {};
+
+  var Store = assign({}, EventEmitter.prototype, {/* Store Methods */}
+
+  // Register to handle all updates
+  AppDispatcher.register(function(payload) {
+    var action = payload.action;
+    /* Methods to call Store Methods */
+  }
+  Store.emitChange();
+});
+</code></pre>
+                </section>
+                  <section>
+                    <h1>One More Time</h1><img src="images/flux-diagram-white-background.png">
+                  </section>
+                <section><h6 id="full-circle">Full Circle</h6>
+<pre><code>var MainSection = React.createClass({
+  _onToggleCompleteAll: function() {
+    TodoActions.toggleCompleteAll();
+  },
+  render: function() {
+    return (
+      &lt;section id=&quot;main&quot;&gt;
+        &lt;input
+          id=&quot;toggle-all&quot;
+          type=&quot;checkbox&quot;
+          onChange={this._onToggleCompleteAll}
+          checked={this.props.areAllComplete ? &#39;checked&#39; : &#39;&#39;}
+        /&gt;
+        &lt;label htmlFor=&quot;toggle-all&quot;&gt;Mark all as complete&lt;/label&gt;
+        &lt;ul id=&quot;todo-list&quot;&gt;{todos}&lt;/ul&gt;
+      &lt;/section&gt;
+    );
+  }
+});
+</code></pre>
+                </section>
+            </section>
+            <section>
+                  <section>
+                    <h1>Shadow DOM</h1><img src="images/shadow-the-hedgehog--with-motorcycle.png">
+                  </section>
+            </section>
+            <section>
+              <h3>Resources</h3><p>Flux GitHub - <a href="https://github.com/facebook/flux">https://github.com/facebook/flux</a>
+ReactJS - <a href="http://facebook.github.io/react/">http://facebook.github.io/react/</a></p>
+
+            </section>
+      </div>
+    </div>
+    <script type="text/javascript" src="bower_components/reveal.js/lib/js/head.min.js"></script>
+    <script type="text/javascript" src="bower_components/reveal.js/js/reveal.js"></script>
+    <script>
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+       Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: 'moon',
+        slideNumber: true,
+        transition: 'concave',
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: revealLocation + 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: revealLocation + 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: revealLocation + 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: revealLocation + 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: revealLocation + 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+       });
+    </script>
+  </body>
+</html>
